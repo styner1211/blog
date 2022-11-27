@@ -66,7 +66,11 @@ export default function Post({
   return (
     <Container>
       <TopContainer>
-        오늘 방문자: {visitors.today} (총 방문자: {visitors.total})
+        {visitors && (
+          <div>
+            오늘 방문자: {visitors.today} (총 방문자: {visitors.total})
+          </div>
+        )}
       </TopContainer>
       <BottomContainer onClick={onClickContent}>
         {path !== "/" ? (
