@@ -3,6 +3,7 @@ import { getNodeMap, toMappings } from "../utils/mappings";
 import "../markdown-styles.css";
 import Script from "next/script";
 import Head from "next/head";
+import { getDateStringWithDiff } from "../utils/time";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -42,12 +43,14 @@ App.getInitialProps = async () => {
   const mappings = toMappings(nodeMap);
 
   const { runReportWithAggregations } = require("../api/ga.js"); // write server-only code by creating a getInitialProps() method
+  const tommorrow = getDateStringWithDiff(1);
+  const yesterday = getDateStringWithDiff(-1);
   const cumulativeTotalCount = await runReportWithAggregations(
     "2022-01-01",
-    "today",
+    tommorrow,
   );
-  const todayTotalCount = await runReportWithAggregations("yesterday", "today");
-  
+  const todayTotalCount = await runReportWithAggregations(yesterday, tommorrow);
+
   const pageProps = {};
   pageProps["mappings"] = mappings;
   pageProps["visitors"] = {
