@@ -38,14 +38,22 @@ export default function App({ Component, pageProps }) {
 App.getInitialProps = async () => {
   const path = require("path"); // LOOK HERE
   const filePath = path.resolve("pages");
-  const nodeMap = getNodeMap(filePath); ////
+  const nodeMap = getNodeMap(filePath);
   const mappings = toMappings(nodeMap);
 
-  const { runReport } = require("../api/ga.js"); // write server-only code by creating a getInitialProps() method
-  runReport();
-
+  const { runReportWithAggregations } = require("../api/ga.js"); // write server-only code by creating a getInitialProps() method
+  const cumulativeTotalCount = await runReportWithAggregations(
+    "2022-01-01",
+    "today",
+  );
+  const todayTotalCount = await runReportWithAggregations("yesterday", "today");
+  
   const pageProps = {};
   pageProps["mappings"] = mappings;
+  pageProps["visitors"] = {
+    today: todayTotalCount,
+    total: cumulativeTotalCount,
+  };
 
   return {
     pageProps,

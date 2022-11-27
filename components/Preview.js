@@ -13,7 +13,7 @@ const Container = styled.div`
 
   max-width: 800px;
 
-  padding: 20px;
+  padding: 4px 20px;
 `;
 
 const PreviewItemContainer = styled.div`

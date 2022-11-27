@@ -3,18 +3,33 @@ import { getNodeMap, toMappings } from "../utils/mappings";
 import path from "path";
 import MarkDownComponent from "../components/MarkDownComponent";
 import fs from "fs";
-import styledComponents from "styled-components";
+import styled from "styled-components";
 import Home from "../components/Preview";
 import { useRouter } from "next/router";
 import defaultStyle from "./../style";
 
-const Container = styledComponents.div`
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+`;
+const TopContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  height: 24px;
+  font-size: 12px;
+  padding: 2px;
+  padding-right: 20px;
+`;
+const BottomContainer = styled.div`
   display: flex;
   justify-content: center;
   overflow-y: overlay;
 
   width: 100%;
-  height: 100%;
+  height: calc(100% - 24px);
 
   overflow-y: overlay;
   /* width */
@@ -47,21 +62,27 @@ export default function Post({
 }) {
   const router = useRouter();
   const path = router.asPath;
+  const visitors = pageProps.visitors;
   return (
-    <Container onClick={onClickContent}>
-      {path !== "/" ? (
-        <MarkDownComponent
-          post={pageProps.post}
-          //meta={item.header.meta}
-          //setLink={setLink}
-        />
-      ) : (
-        <Home
-          setLink={setLink}
-          changeMenuState={changeMenuState}
-          mappings={pageProps.mappings}
-        />
-      )}
+    <Container>
+      <TopContainer>
+        오늘 방문자: {visitors.today} (총 방문자: {visitors.total})
+      </TopContainer>
+      <BottomContainer onClick={onClickContent}>
+        {path !== "/" ? (
+          <MarkDownComponent
+            post={pageProps.post}
+            //meta={item.header.meta}
+            //setLink={setLink}
+          />
+        ) : (
+          <Home
+            setLink={setLink}
+            changeMenuState={changeMenuState}
+            mappings={pageProps.mappings}
+          />
+        )}
+      </BottomContainer>
     </Container>
   );
 }
