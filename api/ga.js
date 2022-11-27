@@ -53,7 +53,7 @@ function printRunReportResponse(response) {
   //[END analyticsdata_print_run_report_response_header]
 
   // [START analyticsdata_print_run_report_response_rows]
-  console.log("Report result:");
+  // console.log("Report result:");
 
   let cumulativeTotalCount = 0;
   response.rows.forEach((row) => {
