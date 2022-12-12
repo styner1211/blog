@@ -151,22 +151,21 @@ export async function getStaticProps({ params }) {
   }
 
   const { runReportWithAggregations } = require("../api/ga.js"); // write server-only code by creating a getInitialProps() method
-  const tommorrow = getDateStringWithDiff(1);
+  const tomorrow = getDateStringWithDiff(1);
   const yesterday = getDateStringWithDiff(-1);
   const cumulativeTotalCount = await runReportWithAggregations(
     "2022-01-01",
-    tommorrow,
+    tomorrow,
   );
-  const todayTotalCount = await runReportWithAggregations(yesterday, tommorrow);
+  const todayTotalCount = await runReportWithAggregations(yesterday, tomorrow);
 
   props["visitors"] = {
     today: todayTotalCount,
     total: cumulativeTotalCount,
   };
 
-  props["revalidate"] = 60;
-
   return {
     props, // 이것도 _app.js의 pageProps로 분해되어 전달된다.
+    revalidate: 60,
   };
 }

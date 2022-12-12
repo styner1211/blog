@@ -10,7 +10,7 @@ const { BetaAnalyticsDataClient } = require("@google-analytics/data");
 // specified in GOOGLE_APPLICATION_CREDENTIALS environment variable.
 const analyticsDataClient = new BetaAnalyticsDataClient();
 
-const propertyId = `${process.env.GA4_PROPERTY_ID}`;
+const propertyId = `${process.env.NEXT_PUBLIC_GA4_PROPERTY_ID}`;
 
 // Runs a report which includes total, maximum and minimum values
 // for each metric.
