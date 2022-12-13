@@ -164,8 +164,13 @@ export async function getStaticProps({ params }) {
     total: cumulativeTotalCount,
   };
 
+  console.log({
+    props, // 이것도 _app.js의 pageProps로 분해되어 전달된다.
+    revalidate: 10,
+  });
+
   return {
     props, // 이것도 _app.js의 pageProps로 분해되어 전달된다.
-    revalidate: 60,
+    revalidate: 10,
   };
 }
