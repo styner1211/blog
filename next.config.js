@@ -1,6 +1,8 @@
 const debug = process.env.NODE_ENV !== "production";
 const name = "blog";
 
+const CopyPlugin = require("copy-webpack-plugin");
+
 module.exports = {
   basePath: !debug ? `/${name}` : "",
   assetPrefix: !debug ? `/${name}/` : "",
@@ -21,6 +23,20 @@ module.exports = {
       net: false,
       tls: false,
     };
+
+    config.plugins.push(
+      new CopyPlugin({
+        patterns: [
+          {
+            from: "pages",
+            to: "pages/",
+            globOptions: {
+              ignore: ["**/*.js"],
+            },
+          },
+        ],
+      }),
+    );
 
     return config;
   },
