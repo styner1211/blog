@@ -1,5 +1,6 @@
 const debug = process.env.NODE_ENV !== "production";
 const name = "blog";
+const path = require("path");
 
 const CopyPlugin = require("copy-webpack-plugin");
 
@@ -29,7 +30,7 @@ module.exports = {
         patterns: [
           {
             from: "pages",
-            to: "/var/task/.next/server/pages/",
+            to: path.join(process.cwd(), "pages/"),
             globOptions: {
               ignore: ["**/*.js"],
             },
