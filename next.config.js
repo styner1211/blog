@@ -1,15 +1,15 @@
 const debug = process.env.NODE_ENV !== "production";
-const name = "";
+const name = ""; // /blog
 const path = require("path");
 
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  basePath: !debug ? `/${name}` : "",
-  assetPrefix: !debug ? `/${name}/` : "",
+  basePath: !debug ? `${name}` : "",
+  assetPrefix: !debug ? `${name}/` : "",
   images: {
     loader: "akamai",
-    path: !debug ? `/${name}/` : "",
+    path: !debug ? `${name}/` : "",
   },
   future: {
     webpack5: true, // by default, if you customize webpack config, they switch back to version 4.
