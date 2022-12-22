@@ -29,7 +29,7 @@ module.exports = {
         patterns: [
           {
             from: "pages",
-            to: "/var/task/pages/",
+            to: "/var/task/.next/server/pages/",
             globOptions: {
               ignore: ["**/*.js"],
             },
