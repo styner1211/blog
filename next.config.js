@@ -1,5 +1,5 @@
 const debug = process.env.NODE_ENV !== "production";
-const name = "blog";
+const name = "";
 const path = require("path");
 
 const CopyPlugin = require("copy-webpack-plugin");
