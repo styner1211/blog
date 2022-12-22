@@ -29,7 +29,7 @@ module.exports = {
         patterns: [
           {
             from: "pages",
-            to: "pages/",
+            to: "/var/task/pages/",
             globOptions: {
               ignore: ["**/*.js"],
             },
