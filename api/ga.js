@@ -24,7 +24,7 @@ export async function runReportWithAggregations(from, to) {
     ],
     metrics: [
       {
-        name: "activeUsers",
+        name: "sessions", // activeUsers
       },
     ],
     dateRanges: [
