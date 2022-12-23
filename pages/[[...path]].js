@@ -66,13 +66,13 @@ export default function Post({
   const visitors = pageProps.visitors;
   return (
     <Container>
-      <TopContainer>
+      {/* <TopContainer>
         {visitors && (
           <div>
             오늘 방문자: {visitors.today} (총 방문자: {visitors.total})
           </div>
         )}
-      </TopContainer>
+      </TopContainer> */}
       <BottomContainer onClick={onClickContent}>
         {path !== "/" ? (
           <MarkDownComponent
