@@ -4,8 +4,9 @@ import path from "path";
 export function getPaths(filePath) {
   let dirs = [];
   traverseDirectory(filePath, 0, dirs);
+
   // refine
-  const paths = dirs.map((e) => {
+  let paths = dirs.map((e) => {
     const p = e.path.replaceAll(filePath, "").replaceAll(path.sep, "/");
     let title = e.title;
     let snippet = e.snippet;
@@ -13,6 +14,9 @@ export function getPaths(filePath) {
     const img = e.img;
     return { path: p, title: title, snippet: snippet, img: img };
   });
+
+  // filter
+  paths = paths.filter((e) => e.path !== "/api");
 
   return paths;
 }
