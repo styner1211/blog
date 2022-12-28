@@ -10,6 +10,8 @@ import defaultStyle from "./../style";
 import { getDateStringWithDiff } from "../utils/time";
 
 const Container = styled.div`
+  position: relative;
+  top: 50px;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -30,28 +32,29 @@ const BottomContainer = styled.div`
   overflow-y: overlay;
 
   width: 100%;
-  height: calc(100% - 24px);
+  height: 100%;
+  /* height: calc(100% - 24px);
 
   overflow-y: overlay;
-  /* width */
+  // width
   ::-webkit-scrollbar {
     width: 4px;
   }
 
-  /* Track */
+  // Track
   ::-webkit-scrollbar-track {
     background: ${defaultStyle.color0};
   }
 
-  /* Handle */
+  // Handle
   ::-webkit-scrollbar-thumb {
     background: grey;
   }
 
-  /* Handle on hover */
+  // Handle on hover
   ::-webkit-scrollbar-thumb:hover {
     background: black;
-  }
+  } */
 `;
 
 // props = _app -> App.getInintialProps props + this -> getStaticProps props

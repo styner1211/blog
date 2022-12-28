@@ -16,17 +16,17 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-size: 16px;
-    overflow: hidden; // disable to bounce effect in safari
+    /* overflow: hidden; // disable to bounce effect in safari */
     
   }
 `;
 
 const GlobalContainer = styled.div`
-  position: absolute;
+  /* position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 0; */
 
   display: flex;
   flex-direction: column;
@@ -35,7 +35,7 @@ const GlobalContainer = styled.div`
   width: 100%;
   height: 100%;
 
-  overflow: hidden; //
+  /* overflow: hidden; // */
 `;
 
 const Container = styled.div`
@@ -48,18 +48,22 @@ const Container = styled.div`
 `;
 
 const HeaderContainer = styled.div`
+  position: fixed;
+  top: 0;
   display: flex;
   align-items: center;
   width: 100%;
   height: 50px;
   border-bottom: 1px solid ${defaultStyle.color0};
+  background-color: white;
+  z-index: 1000;
 `;
 
 const ContentContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   width: 100%;
   height: calc(100% - 50px);
 `;

@@ -5,9 +5,9 @@ import defaultStyle from "../style";
 import StyledLink from "./common/StyledLink";
 
 const Container = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: 1000;
-  top: 0;
+  top: 50px;
   left: 0;
   /* ${(props) =>
     props.responsive === "mobile" &&
@@ -26,13 +26,13 @@ const Container = styled.div`
   /* padding-bottom: 10px; */
   /* padding: 4px; */
 
-  height: 100%;
+  height: calc(100% - 50px);
   width: 0px;
 
   ${(props) =>
     !props.collapsed &&
     css`
-      width: 280px; ///////////////////////////////////////
+      width: 300px; ///////////////////////////////////////
       border-right: 1px solid ${defaultStyle.color0};
       background-color: white;
     `}
@@ -88,7 +88,7 @@ const SidebarItemContainer = styled.div`
   align-items: center;
   width: 100%;
 
-  font-size: 0.8rem;
+  font-size: 1rem;
 `;
 
 const SideBarItem = styled.div`
