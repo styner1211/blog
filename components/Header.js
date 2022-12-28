@@ -24,7 +24,7 @@ const Left = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
-  width: 220px;
+  width: 100px;
 `;
 
 const Middle = styled.div`
@@ -96,7 +96,8 @@ const MenuButtonItem = styled.div`
 `;
 
 const LogoItem = styled.div`
-  margin-left: 6px;
+  margin-left: 10px;
+  width: 40px;
   height: 40px;
 
   cursor: pointer;
@@ -227,7 +228,7 @@ function Header({
           <AiOutlineMenu />
         </MenuButtonItem>
         <LogoItem onClick={onClickLogo}>
-          <Image src={"/barcode.png"} width="100" height="40" alt="logo" />
+          <Image src={"/qrcode.png"} width="40" height="40" alt="logo" />
         </LogoItem>
       </Left>
 

@@ -60,7 +60,7 @@ function getTitleAndSnippet(filePath) {
 
 function getImg(filePath) {
   const pathCol = filePath.split(path.sep);
-  let img = "/barcode.png";
+  let img = "/qrcode.png";
   if (fs.existsSync(filePath + path.sep + "post.md")) {
     const lines = fs
       .readFileSync(filePath + path.sep + "post.md", "utf-8")
