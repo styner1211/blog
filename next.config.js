@@ -1,5 +1,5 @@
-const debug = process.env.NODE_ENV !== "production";
-// const debug = true;
+// const debug = process.env.NODE_ENV !== "production";
+const debug = true;
 const name = "blog";
 const path = require("path");
 
