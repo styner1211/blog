@@ -88,12 +88,21 @@ function MainApp({ Component, pageProps }) {
   //   runReport();
   // }, []);
 
-  const onClickLink = (link) => {
-    setCollapsed(!collapsed);
+  const onClickLink = (newLink) => {
+    if (newLink === link) {
+      setCollapsed(!collapsed);
+    } else {
+      setCollapsed(false);
+    }
+
     // if (responsive === "mobile") {
     //   setCollapsed(true);
     // }
-    setLink(link);
+    setLink(newLink);
+  };
+
+  const onClickSidebarMenu = (newLink) => {
+    setLink(newLink);
   };
 
   const onClickMenuButton = () => {
@@ -139,7 +148,7 @@ function MainApp({ Component, pageProps }) {
             responsive={responsive}
             collapsed={collapsed}
             link={link}
-            onClickLink={onClickLink}
+            onClickLink={onClickSidebarMenu}
             menuState={menuState}
             changeMenuState={changeMenuState}
             mappings={pageProps.mappings}
