@@ -152,27 +152,27 @@ export async function getStaticProps({ params }) {
     }
   }
 
-  const { runReportWithAggregations } = require("../api/ga.js"); // write server-only code by creating a getInitialProps() method
-  const tomorrow = getDateStringWithDiff(1);
-  const yesterday = getDateStringWithDiff(-1);
-  const cumulativeTotalCount = await runReportWithAggregations(
-    "2022-01-01",
-    tomorrow,
-  );
-  const todayTotalCount = await runReportWithAggregations(yesterday, tomorrow);
+  // const { runReportWithAggregations } = require("../api/ga.js"); // write server-only code by creating a getInitialProps() method
+  // const tomorrow = getDateStringWithDiff(1);
+  // const yesterday = getDateStringWithDiff(-1);
+  // const cumulativeTotalCount = await runReportWithAggregations(
+  //   "2022-01-01",
+  //   tomorrow,
+  // );
+  // const todayTotalCount = await runReportWithAggregations(yesterday, tomorrow);
 
-  props["visitors"] = {
-    today: todayTotalCount,
-    total: cumulativeTotalCount,
-  };
+  // props["visitors"] = {
+  //   today: todayTotalCount,
+  //   total: cumulativeTotalCount,
+  // };
 
-  console.log({
-    props, // 이것도 _app.js의 pageProps로 분해되어 전달된다.
-    revalidate: 10,
-  });
+  // console.log({
+  //   props, // 이것도 _app.js의 pageProps로 분해되어 전달된다.
+  //   revalidate: 10,
+  // });
 
   return {
     props, // 이것도 _app.js의 pageProps로 분해되어 전달된다.
-    revalidate: 10,
+    // revalidate: 10,
   };
 }
