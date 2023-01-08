@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: "https://styner1211.github.io/blog",
+  siteUrl: "http://modugraph.com",
   changefreq: "daily",
   priority: 0.7,
   sitemapSize: 5000,
