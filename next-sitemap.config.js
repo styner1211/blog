@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: "http://modugraph.com",
+  siteUrl: "http://www.modugraph.com",
   changefreq: "daily",
   priority: 0.7,
   sitemapSize: 5000,
