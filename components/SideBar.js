@@ -36,7 +36,13 @@ const Container = styled.div`
       border-right: 1px solid ${defaultStyle.color0};
       background-color: white;
     `}
-  transition: width 0.2s ease-out;
+  ${(props) =>
+    props.collapsed &&
+    css`
+      width: 0;
+      border-right: 0px solid ${defaultStyle.color0};
+    `}
+  transition: all 0.3s ease-out;
 
   /* overflow-x: hidden; */
   overflow-y: overlay;
