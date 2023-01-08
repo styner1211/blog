@@ -62,7 +62,6 @@ export default function Post({
   pageProps,
   setLink,
   changeMenuState,
-  onClickContent,
 }) {
   const router = useRouter();
   const path = router.asPath;
@@ -76,7 +75,7 @@ export default function Post({
           </div>
         )}
       </TopContainer> */}
-      <BottomContainer onClick={onClickContent}>
+      <BottomContainer>
         {path !== "/" ? (
           <MarkDownComponent
             post={pageProps.post}

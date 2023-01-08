@@ -17,7 +17,6 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-size: 16px;
     /* overflow: hidden; // disable to bounce effect in safari */
-    
   }
 `;
 
@@ -90,7 +89,7 @@ function MainApp({ Component, pageProps }) {
   // }, []);
 
   const onClickLink = (link) => {
-    setCollapsed(false);
+    setCollapsed(!collapsed);
     // if (responsive === "mobile") {
     //   setCollapsed(true);
     // }
@@ -149,7 +148,6 @@ function MainApp({ Component, pageProps }) {
             pageProps={pageProps}
             setLink={setLink}
             changeMenuState={changeMenuState}
-            onClickContent={onClickContent}
           />
         </ContentContainer>
       </Container>
