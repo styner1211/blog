@@ -20,8 +20,9 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 100%;
+  /* align-items: center; */
+  padding-left: 10px;
+  padding-right: 10px;
   /* padding-top: 10px; */
   /* padding-bottom: 10px; */
   /* padding: 4px; */
@@ -31,8 +32,17 @@ const Container = styled.div`
 
   ${(props) =>
     !props.collapsed &&
+    props.responsive === "mobile" &&
     css`
-      width: 300px; ///////////////////////////////////////
+      width: 100%; ///////////////////////////////////////
+      border-right: 1px solid ${defaultStyle.color0};
+      background-color: white;
+    `}
+  ${(props) =>
+    !props.collapsed &&
+    props.responsive !== "mobile" &&
+    css`
+      width: 400px; ///////////////////////////////////////
       border-right: 1px solid ${defaultStyle.color0};
       background-color: white;
     `}
@@ -71,7 +81,7 @@ const Group = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 240px;
+  width: 100%;
 `;
 
 const Label = styled.div`

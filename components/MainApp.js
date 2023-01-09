@@ -89,11 +89,11 @@ function MainApp({ Component, pageProps }) {
   // }, []);
 
   const onClickLink = (newLink) => {
-    if (newLink === link) {
-      setCollapsed(!collapsed);
-    } else {
-      setCollapsed(false);
-    }
+    // if (newLink === link) {
+    //   setCollapsed(!collapsed);
+    // } else {
+    //   setCollapsed(false);
+    // }
 
     // if (responsive === "mobile") {
     //   setCollapsed(true);
