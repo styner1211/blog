@@ -9,40 +9,30 @@ const Container = styled.div`
   z-index: 1000;
   top: 50px;
   left: 0;
-  /* ${(props) =>
-    props.responsive === "mobile" &&
-    css`
-      position: absolute;
-      z-index: 1;
-      top: 0;
-      left: 0;
-    `} */
 
   display: flex;
   flex-direction: column;
   /* align-items: center; */
   padding-left: 10px;
   padding-right: 10px;
-  /* padding-top: 10px; */
-  /* padding-bottom: 10px; */
-  /* padding: 4px; */
 
   height: calc(100% - 50px);
   width: 0px;
 
-  ${(props) =>
+  background-color: white;
+
+  /* ${(props) =>
     !props.collapsed &&
     props.responsive === "mobile" &&
     css`
-      width: 100%; ///////////////////////////////////////
+      width: 100%;
       border-right: 1px solid ${defaultStyle.color0};
       background-color: white;
-    `}
+    `} */
   ${(props) =>
     !props.collapsed &&
-    props.responsive !== "mobile" &&
     css`
-      width: 400px; ///////////////////////////////////////
+      width: 340px;
       border-right: 1px solid ${defaultStyle.color0};
       background-color: white;
     `}

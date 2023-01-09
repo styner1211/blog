@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, css } from "styled-components";
 import defaultStyle from "../style";
 import Header from "./Header";
 import SideBar from "./SideBar";
@@ -10,13 +10,20 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-
+  
   html, body {
     /* background: #e9ecef; */
     margin: 0;
     padding: 0;
     font-size: 16px;
     /* overflow: hidden; // disable to bounce effect in safari */
+
+    ${(props) =>
+    !props.collapsed && props.responsive === "mobile" &&
+      css`
+        overflow: hidden
+      `
+    }
   }
 `;
 
@@ -126,7 +133,7 @@ function MainApp({ Component, pageProps }) {
 
   return (
     <GlobalContainer>
-      <GlobalStyle />
+      <GlobalStyle responsive={responsive} collapsed={collapsed} />
       <Container>
         <HeaderContainer>
           <Header
@@ -157,6 +164,7 @@ function MainApp({ Component, pageProps }) {
             pageProps={pageProps}
             setLink={setLink}
             changeMenuState={changeMenuState}
+            collapsed={collapsed}
           />
         </ContentContainer>
       </Container>
