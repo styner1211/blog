@@ -54,7 +54,7 @@ const Container = styled.div`
     `}
   transition: all 0.3s ease-out;
 
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
   overflow-y: overlay;
   /* width */
   ::-webkit-scrollbar {
