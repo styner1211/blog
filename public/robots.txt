@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://styner1211.github.io/blog
+Host: http://www.modugraph.com
 
 # Sitemaps
-Sitemap: https://styner1211.github.io/blog/sitemap.xml
+Sitemap: http://www.modugraph.com/sitemap.xml
