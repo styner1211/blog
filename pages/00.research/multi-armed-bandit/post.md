@@ -2,7 +2,7 @@
 
 카지노에 여러대의 슬롯 머신이 있다고 하자. 그리고 일확천금을 위해서 어떤 사람이 슬롯 머신을 여기 저기서 당기고 있다. 이때 이 사람이 수익을 극대화 하는 방법이 있을까?
 
-<img width="200" src="/assets/research/multi-armed-bandit/mab.JPG" />
+<img width="200" src="/assets/research/multi-armed-bandit/mab.jpg" />
 
 Multi-Armed Bandit (MAB)는 이러한 문제 상황을 합리적으로 접근할 수 있는 방법을 제시한다. 현실 세계에서는 여러가지 활용처가 있겠지만, 컨텐츠를 노출하거나 광고를 노출할 때 어떻게 해야 수익을 높일 수 있을지 시뮬레이션 하기위한 방법으로 사용된다고 한다.
 
