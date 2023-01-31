@@ -8,7 +8,7 @@
 
 
 # Yarn
-- 기본 프레임워크인 MapReduce뿐만 아니라, Flink, Spark 같은 분산 처리를 위한 프레임워크나 도구들이 HDFS와 HDFS가 설치된 컴퓨팅 자원을 더 쉽고 효율적으로 이용할 수 있게 함
+-  기본 프레임워크인 MapReduce뿐만 아니라, Flink, Spark 같은 분산 처리를 위한 프레임워크나 도구들이 HDFS와 HDFS가 설치된 컴퓨팅 자원을 더 쉽고 효율적으로 이용할 수 있게 함
 - HDFS의 Locality를 높여줌, Data가 있는 곳의 Computing 자원을 최대한 활용하도록 함 
 - Spark을 보통 Yarn에 띄워서 씀
 
