@@ -122,3 +122,68 @@
   </body>
 </html>
 ```
+
+## 리액트의 생명 주기(Life Cycle)
+
+### 클래스형 컴포넌트의 생명 주기
+
+```javascript
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { date: new Date() }; // 기본 state 셋팅
+  }
+
+  componentDidMount() {
+    // useEffect의 effect 함수 + deps = []
+    this.timerID = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    // useEffect의 clean-up 함수와 비슷
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date(),
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<Clock />);
+```
+
+### state의 함수형 업데이트
+
+> React는 성능을 위해 여러 setState() 호출을 단일 업데이트로 한꺼번에 처리할 수 있다.
+
+this.props와 this.state가 비동기적으로 업데이트될 수 있기 때문에 다음 state를 계산할 때 해당 값에 의존해서는 안된다.
+
+```
+// Wrong
+this.setState({
+  counter: this.state.counter + this.props.increment,
+});
+```
+
+따라서, 객체보다는 함수를 인자로 사용하는 다른 형태의 setState()를 사용 한다.
+
+```
+// Correct
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+```
+
+인자로 사용된 함수는 이전 state를 첫 번째 인자로 받아들일 것이고, 업데이트가 적용된 시점의 props를 두 번째 인자로 받아들인다.

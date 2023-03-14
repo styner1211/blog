@@ -14,6 +14,8 @@ $ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bas
 
 nvm을 이용한 Node.js 설치
 
+> node.js를 설치하면 npm 및 npx가 함께 설치된다.
+
 ```sh
 $ nvm install --lts
 ```
@@ -31,11 +33,18 @@ npm(Node.js의 패키지 관리자)을 이용하여 yarn 설치
 $ npm install --global yarn
 ```
 
-### 3. 리액트 앱 실행
+### 4. CRA를 이용한 리액트 프로젝트 생성
+
+```sh
+$ npx create-react-app my-app
+```
+
+### 5. 리액트 앱 실행
 
 아래 명령어는 개발 서버를 실행하고 브라우저에 자동으로 페이지가 열리면서 리액트 앱[(http://localhost:3000/)](http://localhost:3000/)이 실행된다.
 
 ```sh
+$ cd my-app
 $ yarn start
 ```
 

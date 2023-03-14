@@ -23,6 +23,8 @@
 
 ## React에서 Event 처리
 
+> https://ko.reactjs.org/docs/events.html
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -117,4 +119,44 @@
     </script>
   </body>
 </html>
+```
+
+# 이벤트 Capturing과 Bubbling
+
+```javascript
+function Event() {
+  const handleButtonClick = () => {
+    console.log('handleButtonClick')
+  }
+
+  cconst handleClickCapture = () => {
+    console.log('handleClickCapture')
+  }
+
+  const handleClickCapture2 = () => {
+    console.log('handleClickCapture2')
+  }
+
+  const handleButtonBubble = () => {
+    console.log('handleClickBubble')
+  }
+
+
+  return (
+    <div onClickCapture={handleClickCapture}> // 자식보다 부모가 먼저 클릭 이벤트를 인지하고 싶을 때
+      <div onClickCapture={handleClickCapture2} onClick={handleClickBubble}>
+        <button onClick={handleButtonClick}>Button</button>
+      </div>
+    </div>
+  )
+}
+```
+
+실행 결과
+
+```
+handleClickCapture
+handleClickCapture2
+handleButtonClick
+handleClickBubble
 ```

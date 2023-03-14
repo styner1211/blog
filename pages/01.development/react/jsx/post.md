@@ -43,6 +43,7 @@
 
 ## JSX를 이용한 Element 생성
 
+> https://ko.reactjs.org/docs/introducing-jsx.html
 > JSX란 `const element = <h1>Hello, world!</h1>` 과 같은 HTML 태그 처럼 쓸 수 있는 JavaScript 확장 문법
 > JSX를 쓰기 위해서는 Babel이라는 JavaScript 컴파일러가 필요
 
