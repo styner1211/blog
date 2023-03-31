@@ -11,12 +11,6 @@ Linux 환경에서는 KVM, Windows에서는 Hyper-v, MacOS에선 HyperKit을 사
 brew install --cask multipass
 ```
 
-##
-
-```sh
-multipass launch --name k3s-master1 --cpus 2 --memory 8G --disk 120G
-```
-
 ## Multipass 사용법
 
 ### 우분투 인스턴스 생성

@@ -4,7 +4,7 @@
 
 ## React.memo
 
-컴포넌트가 동일한 props로 동일한 결과를 렌더링해낸다면, React.memo를 호출하고 결과를 메모이징(Memoizing)하도록 래핑하는 [고차 컴포넌트](/01.development/react/memoization).
+컴포넌트가 동일한 props로 동일한 결과를 렌더링해낸다면, React.memo를 호출하고 결과를 메모이징(Memoizing)하도록 래핑하는 [고차 컴포넌트](/01.development/react/hoc).
 
 즉, React는 컴포넌트를 렌더링하지 않고 마지막으로 렌더링된 결과를 재사용한다.
 
