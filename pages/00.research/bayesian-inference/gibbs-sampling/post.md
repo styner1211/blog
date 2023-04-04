@@ -3,7 +3,7 @@
 
 ## Inverse Transform Sampling
 
-[LDA](/docs/research/topic-modeling/lda)에서 다음과 같은 Sampling Equation을 유도 했는데, 이걸 어떻게 샘플링을 해야하는지 알아내는 데 굉장히 오랜 시간이 걸렸다.
+[LDA](/00.research/topic-modeling/lda)에서 다음과 같은 Sampling Equation을 유도 했는데, 이걸 어떻게 샘플링을 해야하는지 알아내는 데 굉장히 오랜 시간이 걸렸다.
 
 $$
 \begin{aligned}
@@ -63,10 +63,10 @@ for(newTopic = 0; newTopic<K; newTopic++) {
 
 이 방법을 알게된 이후 부터, Gibbs Sampling 방식으로 베이지안 모델을 구현하는데 속도가 붙었었고, 개인적으로 아래와 같은 모델을 이 방식을 이용하여 직접 구현해 보면서 많은 공부가 되었다.
 
-1. [Latent Dirichlet Allocatio (LDA)](/docs/research/topic-modeling/lda)
-2. [Hierarchical Dirichlet Process (HDP)](/docs/research/topic-modeling/hdp)
-3. [Gaussain LDA (GLDA)](/docs/research/topic-modeling/glda)
-4. [Correlated Topic Model (CTM)](/docs/research/topic-modeling/ctm)
+1. [Latent Dirichlet Allocatio (LDA)](/00.research/topic-modeling/lda)
+2. [Hierarchical Dirichlet Process (HDP)](/00.research/topic-modeling/hdp)
+3. [Gaussain LDA (GLDA)](/00.research/topic-modeling/glda)
+4. [Correlated Topic Model (CTM)](/00.research/topic-modeling/ctm)
 
 한 가지 주의해야 할 것은, Gibbs Samping 방식으로 추론을 하기 위해서는 위와 같은 Sampling Equation을 유도해야하는데, LDA에서 소개했듯이 만만치 않다. (LDA가 그중 가장 쉬운거라고 생각하면됨)
 
@@ -74,4 +74,4 @@ for(newTopic = 0; newTopic<K; newTopic++) {
 
 특히 위 4번 CTM은 LDA 논문을 쓴 저자가 후속 연구로 냈던 방법인데, 저자는 Gibbs Sampling이 아닌 Variational Inference 계열의 방식을 택했다. 왜냐하면 해당 모델에서 사용하는 확률 분포가 conjugate한 관계가 아니었기 때문인데, 이걸 또 Gibbs Sampling으로 구현하기 위한 연구자가 있었고, 나는 이 방식을 이용하여 CTM을 구현했다. 굉장히 수학적인 내용이 많아서 고생을 많이 했지만, 시간을 내서 정리할 계획이다. (4번 구현이 가장 어려웠고 3번은 개념 자체가 어려웠음)
 
-또한 [Variational Inference](/docs/research/bayesian-inference/variational-inference)에 대해서도 소개를 하려고 한다. (이것도 어려움)
+또한 [Variational Inference](/00.research/bayesian-inference/variational-inference)에 대해서도 소개를 하려고 한다. (이것도 어려움)

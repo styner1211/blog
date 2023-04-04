@@ -5,5 +5,5 @@ Matrix Factorization은 추천 시스템에서 협업 필터링(Collaborative Fi
 1. Singular Value Decomposition (SVD)
 2. Alternating Least Square
 
-먼저 Singular Value Decomposition에 대한 개념은 [별도 페이지](/docs/study/svd)에 정리 했으니 참고하면 좋을 것 같다.
+먼저 Singular Value Decomposition에 대한 개념은 [별도 페이지](/02.study/svd)에 정리 했으니 참고하면 좋을 것 같다.
 

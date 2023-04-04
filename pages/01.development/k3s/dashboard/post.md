@@ -41,7 +41,7 @@ sudo k3s kubectl create -f dashboard.admin-user.yml -f dashboard.admin-user-role
 ### `admin-user` 토큰 생성
 > 토큰은 잘 기록해 두자.
 ```sh
-sudo k3s kubectl -n kubernetes-dashboard create token admin-user
+sudo k3s kubectl -n kubernetes-dashboard create token admin-user --duration=720h
 ```
 
 ## K3S 클러스터 외부에서 대시보드 접속

@@ -2,7 +2,7 @@
 
 > LDA는 임의의 문서를 K개의 토픽 분포로 표현하고, 각 토픽은 V개의 단어 분포로 표현하는 모델이다.
 
-> 토픽 갯수 K와 단어집 갯수 V는 하이퍼파라미터이다. 특히 토픽 갯수 K를 지정하지 않는, 좀 더 advanced한 방법론도 존재하는데 [Hierarchical Dirichlet Process](/docs/research/topic-modeling/hdp)에서 소개하도록 하겠다.
+> 토픽 갯수 K와 단어집 갯수 V는 하이퍼파라미터이다. 특히 토픽 갯수 K를 지정하지 않는, 좀 더 advanced한 방법론도 존재하는데 [Hierarchical Dirichlet Process](/00.research/topic-modeling/hdp)에서 소개하도록 하겠다.
 
 일반적으로 사람들이 글을 쓸 때는 여러가지 소재를 담아 이야기를 구성한다. 이때 이 소재가 바로 토픽모델에서 말하는 토픽(Topic) 이다.
 
@@ -130,7 +130,7 @@ $$
 1. Variational Inference
 2. Gibbs Sampling
 
-[베이지안 추론](/docs/research/bayesian-inference)에 대해서는 다룰 내용이 방대하므로 별도의 페이지에서 정리를 할 예정이고, 여기에서는 Gibbs Sampling 방식으로 설명을 이어나가도록 하겠다.
+[베이지안 추론](/00.research/bayesian-inference)에 대해서는 다룰 내용이 방대하므로 별도의 페이지에서 정리를 할 예정이고, 여기에서는 Gibbs Sampling 방식으로 설명을 이어나가도록 하겠다.
 
 ## (Collapsed) Gibbs Sampling
 

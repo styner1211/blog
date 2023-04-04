@@ -16,7 +16,8 @@ curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s - server --cluste
 
 ### K3S 삭제
 ```sh
-/usr/local/bin/k3s-uninstall.sh
+$ /usr/local/bin/k3s-killall.sh
+$ /usr/local/bin/k3s-uninstall.sh
 ```
 
 
