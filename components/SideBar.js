@@ -65,6 +65,8 @@ const Container = styled.div`
   ::-webkit-scrollbar-thumb:hover {
     background: black;
   }
+
+  overscroll-behavior: contain;
 `;
 
 const Group = styled.div`
