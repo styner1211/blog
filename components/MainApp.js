@@ -9,7 +9,7 @@ import { useIsMobile } from "../hooks/useMobile";
 const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
-    font-family: -apple-system, 'IBMPlexSansKR-Light', 'Courier New', monospace;
+    // font-family: -apple-system, 'IBMPlexSansKR-Light', 'Courier New', monospace;
   }
   
   html, body {
