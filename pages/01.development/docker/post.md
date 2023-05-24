@@ -7,7 +7,6 @@
 #### 1. Update the `apt` package index and install packages to allow `apt` to use a repository over HTTPS: 
 ```sh
 $ sudo apt-get update
-
 $ sudo apt-get install \
     ca-certificates \
     curl \
@@ -16,8 +15,8 @@ $ sudo apt-get install \
 
 #### 2. Add Docker’s official GPG key:
 ```sh
-sudo mkdir -m 0755 -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+$ sudo mkdir -m 0755 -p /etc/apt/keyrings
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 ```
 
 #### 3. Use the following command to set up the stable repository.
@@ -31,7 +30,6 @@ $ echo \
 ### Install Docker Engine
 ```sh
 $ sudo apt-get update
-
 $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
@@ -40,7 +38,6 @@ $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugi
 도커 레지스트리에서 인증 없이 `docker pull`을 하기 위해 아래와 같이 수정하자.
 ```sh
 $ cd /etc/docker
-
 $ sudo vi daemon.json
 ```
 

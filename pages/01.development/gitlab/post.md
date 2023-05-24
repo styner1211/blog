@@ -7,7 +7,7 @@
 ## GitLab Volume 위치 지정
 
 | Local Location | Container Location | Usage |
-| :-- | :-- | |
+| :-- | :-- | :-- |
 | $GITLAB_HOME/data | /var/opt/gitlab | For storing application data |
 | $GITLAB_HOME/logs	| /var/log/gitlab | For storing logs |
 | $GITLAB_HOME/config | /etc/gitlab | For storing the GitLab configuration files |
@@ -39,7 +39,7 @@ exec format error
 ```sh
 $ sudo docker run --detach \
   --hostname 203504.iptime.org \
-  --env GITLAB_OMNIBUS_CONFIG="external_url 'http://203504.iptime.org:11080'; gitlab_rails['gitlab_shell_ssh_port'] = 11022" \
+  --env GITLAB_OMNIBUS_CONFIG="external_url 'http://[호스트이름]:11080'; gitlab_rails['gitlab_shell_ssh_port'] = 11022" \
   --publish 11080:11080 --publish 11022:22 \
   --name gitlab \
   --restart always \
@@ -53,7 +53,7 @@ $ sudo docker run --detach \
 ## GitLab 접속
 
 ```
-http://localhost:11080
+http://[호스트이름]:11080
 ```
 
 ## GitLab `root` 계정의 초기 비밀번호 확인

@@ -166,9 +166,9 @@ IPerson[keyof IPerson]
 
 keyof를 적용했지만, 여전히 리턴 타입이 key에 의존한다는 것은 해소되지 않음.
 
-해결 방법
-> IPerson -> T
-> K extends keyof T
+### 해결 방법
+- IPerson -> T
+- K extends keyof T
 
 
 ```typescript

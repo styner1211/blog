@@ -3,7 +3,7 @@
 ## Kubernetes Dashbaord 설치
 
 ```sh
-GITHUB_URL=https://github.com/kubernetes/dashboard/releases
+$ GITHUB_URL=https://github.com/kubernetes/dashboard/releases
 VERSION_KUBE_DASHBOARD=$(curl -w '%{url_effective}' -I -L -s -S ${GITHUB_URL}/latest -o /dev/null | sed -e 's|.*/||')
 sudo k3s kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/${VERSION_KUBE_DASHBOARD}/aio/deploy/recommended.yaml
 ```
@@ -48,15 +48,15 @@ sudo k3s kubectl -n kubernetes-dashboard create token admin-user --duration=720h
 
 위 방식으로 배포한 Kubernates Dashboard는 기본적으로 K3S 클러스터 내부에서만 접근할 수 있다. 만약 K3S 클러스터 외부에서 대시보드에 접근하고 싶다면, NodePort 설정을 하던가, Ingress를 이용하여 대시보드를 외부로 노출 시킬 수 있다.
 
-### Ingress 설정
+### 옵션 1: Ingress 설정
 
 > K3S는 디폴트로 Traefik을 이용한다.
 
 #### `kubernetes-dashboard-ingress.yml` 파일 생성
 
-아래 hosts에 들어가 있는 값인 vm-macmini는 K3S가 실행되어 있는 우분투 VM의 호스트 명으로. http://vm-macmini로 접속하면 kubernetes-dashboard 서비스의 9090 포트로 트래픽이 전달된다.
+아래 host에 들어가 있는 값인 `[호스트명]`는 K3S가 실행되어 있는 우분투 VM의 호스트 명으로. `http://[호스트명]`로 접속하면 kubernetes-dashboard 서비스의 9090 포트로 트래픽이 전달된다.
 
-> vm-macmini 처럼 호스트명으로 접근하기 위해 로컬 DNS 설정이 필요하다. 
+> `http://[호스트명]` 처럼 호스트명으로 접근하기 위해 로컬 DNS 설정이 필요하다. 
 
 ```
 apiVersion: networking.k8s.io/v1
@@ -70,7 +70,7 @@ metadata:
     kubernetes.io/ingress.class: "traefik"
 spec:
   rules:
-  - host: vm-macmini
+  - host: [호스트명]
     http:
       paths:
       - path: /
@@ -94,7 +94,7 @@ sudo vi /etc/hosts
 에서 아래 라인은 추가한다.
 
 ```
-192.168.0.40    vm-macmini
+192.168.0.44    [호스트명]
 ```
 
 #### Ingress 배포
@@ -149,6 +149,49 @@ kubectl edit deployment kubernetes-dashboard -n kubernetes-dashboard
           protocol: TCP 
 ```
 
+### 옵션 2: NodePort 설정
+
+```sh
+$ kubectl edit service kubernetes-dashboard -n kubernetes-dashboard
+```
+
+```
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2023-04-07T14:20:56Z"
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+  resourceVersion: "9934611"
+  uid: 99e837e1-4047-470b-9bf9-0e2aa29214e2
+spec:
+  clusterIP: 10.43.24.23
+  clusterIPs:
+  - 10.43.24.23
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 9090 # 변경
+    protocol: TCP
+    targetPort: 9090 # 변경
+  selector:
+    k8s-app: kubernetes-dashboard
+  sessionAffinity: None
+  type: NodePort # ClusterIP에서 NodePort로 변경
+status:
+  loadBalancer: {}
+
+```
+
 위와 같이 수정 후, 디플로이먼트를 재시작 한다.
 
 > 파드 수를 줄였다가 늘리는 방식으로 재시작
@@ -172,10 +215,71 @@ service/kubernetes-dashboard        ClusterIP   10.43.116.244   <none>        90
 
 #### K3S 클러스터 외부(내 맥미니)에서 대시보드 접속
 
-http://vm-macmini/#/login 로 접속 해보면, 아래와 같은 경고 메시지와 함께 로그인이 불가능한 것을 알 수 있다.
+http://[호스트명]/#/login 로 접속 해보면, 아래와 같은 경고 메시지와 함께 로그인이 불가능한 것을 알 수 있다.
 
 <img width="600" src="/assets/development/k3s/dashboard/insecure.png" />
 
 이것은 경고 메시지 그대로 대시보드에 접속하기 위해서는, K3S 내부에서 localhost로 접근하거나, https 프로토콜을 이용해서 접근만 허용 가능하도록 만들어져 있기 때문이다.
 
-하지만, http://vm-macmini/#/login 로 접속하면 위에서 기록해둔 토큰을 입력하면 로그인이 가능하다!
+하지만, http://[호스트명]/#/login 로 접속하면 위에서 기록해둔 토큰을 입력하면 로그인이 가능하다!
+
+
+
+
+### 옵션 2: NodePort 설정
+
+#### service 수정
+
+```sh
+$ kubectl edit service kubernetes-dashboard -n kubernetes-dashboard
+```
+
+```
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2023-04-07T14:20:56Z"
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+  resourceVersion: "9934611"
+  uid: 99e837e1-4047-470b-9bf9-0e2aa29214e2
+spec:
+  clusterIP: 10.43.24.23
+  clusterIPs:
+  - 10.43.24.23
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 32767 # 추가
+    port: 443
+    protocol: TCP
+    targetPort: 8443
+  selector:
+    k8s-app: kubernetes-dashboard
+  sessionAffinity: None
+  type: NodePort # ClusterIP에서 NodePort로 변경
+status:
+  loadBalancer: {}
+
+```
+
+위와 같이 수정 후, 디플로이먼트를 재시작 한다.
+
+> 파드 수를 줄였다가 늘리는 방식으로 재시작
+
+```sh
+$ kubectl scale deploy kubernetes-dashboard --replicas 0 -n kubernetes-dashboard
+$ kubectl scale deploy kubernetes-dashboard --replicas 1 -n kubernetes-dashboard
+```
+
+
+

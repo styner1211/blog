@@ -1,4 +1,4 @@
-# TypeScript: 타입스크립트
+# 타입스크립트 (TypeScript)
 
 ## 타입스크린트 란?
 - Typed Superset of JavaScript

@@ -2,7 +2,10 @@
 
 > Git Repository와 Jenkins를 연동시켜 소스코드를 빌드하고 쿠버네티스에 배포하는 파이프라인을 만들어 보자.
 
+
+
 ## Jenkins 환경 설정
+
 
 ### Jenkins 플러그인 설치
 
@@ -10,13 +13,16 @@ Dashboard > Jenkins 관리 > 플러그인 관리 > `Available plugins`
 
 `Kubernetes`, `GitLab`, `Docker Commons` 를 다운로드 및 설치하고 재시작 한다.
 
+
 ### Kubernetes 설정
 
 Dashboard > Jenkins 관리 > 노드 관리 > `Configure Clouds`
 
+
 ### `Kubernetes Cloud details`
 
 `Disable https certificate key` 항목에 체크
+
 
 ### `Credentials`
 
@@ -28,9 +34,11 @@ Dashboard > Jenkins 관리 > 노드 관리 > `Configure Clouds`
 
 연결이 정상적으로 되었으면 Save 한다.
 
+
 ### 연결 테스트
 
 `Test Connection` 버튼을 눌러 연결에 이상이 없음을 확인한다.
+
 
 ### 테스트 파이프라인 생성 및 실행
 
@@ -59,12 +67,43 @@ podTemplate(label: 'builder',
 이상이 없다면, Build History에 Success 이럭이 남을 것이고, 쿠버네티스에서도 정상적으로 Pod가 실행되고 사라지는 것을 확인할 수 있을 것 이다.
 
 
-## Git Repository 연동
+
+## Jenkins - Git Repository 연동
+
+새로운 Item
+
+
+General
+
+이 빌드는 매개변수가 있습니다.
+- Choice Parameter
+  - Name: module
+  - Choice: service
+
+
+
+Pipeline 선택
+
+- Definition: Pipeline script from SCM
+- SCM: Git
+- Repository URL: [프로젝트 Git 레포지토리 URL]
+- Credentials
+  - Add 버튼 클릭
+    - Kind: GitLab API token
+      - GitLab Access Token 발급하여 입력
+        - GitLab 접속 > Preference > Access Tokens 
+          - Token name: jenkins_token
+          - Expiration date: 2999-12-31
+          - Select scopes: 모두 체크
+        - ID: jenkins
+
+위 설정 이후, `저장`
 
 
 ### 인증서 복사
-/etc/docker/certs.d/[도메인:포트]/ca.crt
-
+```sh
+$ sudo cp ca.crt /etc/docker/certs.d/[도메인:포트]/ca.crt
+```
 
 
 ### RBAC
@@ -78,10 +117,8 @@ Error from server (Forbidden): namespaces "test" is forbidden: User "system:serv
 ```
 
 ```sh
-kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts:jenkins
+$ kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts:jenkins
 ```
-
-
 
 #### 쿠버네티스 노드에 인증서 복사
 
@@ -95,7 +132,27 @@ Failed to pull image "[HARBOR_HOST]:[HARBOR_PORT]/test/demo:latest": rpc error: 
 
 ```sh
 $ sudo cp ca.crt /usr/local/share/ca-certificates/[HARBOR_HOST]:[HARBOR_PORT]
+
 $ sudo update-ca-certificates
+
 $ sudo systemctl restart k3s
 ```
 
+
+
+## Jenkins - Harbor 연동
+
+Jenkins가 CI/CD 파이프라인을 수행하는 과정에서 harbor에 접근할 수 있도록 Credentials를 설정한다.
+
+Dashboard > Jenkins 관리 > Credentials > Stores scoped to Jenkins (System) -> Grobal credentials (unrestricted) -> Add Credentials
+
+다음과 같이 Credential을 추가한다.
+
+> Username, Password, ID는 차후, Jenkinsfile 작성 시 필요하다.
+
+- Kind: Username with password
+- Scope: Global (Jenkins, nodes, items, all child items, etc)
+- Username: [Harbor 아이디]
+- Password: [Harbor 비밀번호]
+- ID: harbor
+- Description:
