@@ -56,6 +56,9 @@ NOTES:
   $ helm --namespace=elasticsearch test elasticsearch
 ```
 
+https://203504.iptime.org:30002/_cat 접속 후,아래 계정으로 Elasticsearch 서버를 확인해 볼 수 있다.
+- username: elastic (built-in user)
+- passwaord: (```$ kubectl get secrets --namespace=elasticsearch elasticsearch-master-credentials -ojsonpath='{.data.password}' | base64 -d```) 로 확인 가능
 
 ### Elasticsearch 삭제
 
