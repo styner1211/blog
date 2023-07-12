@@ -24,6 +24,12 @@ service:
   nodePorts:
     client: 30001
 ...
+externalAccess:
+  service:
+    type: LoadBalancer # NodePort 로 수정
+    nodePorts: [] # [30001]로 수정
+  useHostIps: false # true 로 수정
+...
 ```
 
 ## Kafka 설치
@@ -31,6 +37,7 @@ service:
 ```sh
 $ kubectl create namespace kafka
 $ helm install kafka -f values.yaml . -n kafka
+$ helm upgrade kafka -f values.yaml . -n kafka
 ```
 
 ```

@@ -8,6 +8,12 @@ $ helm fatch elastic/elasticsearch
 $ tar xzvf elasticsearch-8.5.1.tgz
 ```
 
+```sh
+$ helm repo add bitnami https://charts.bitnami.com/bitnami
+$ helm fetch bitnami/elasticsearch
+$ tar xzvf elasticsearch-19.8.1.tgz
+```
+
 ## `values.yaml` 수정
 
 ```
@@ -34,6 +40,43 @@ esJavaOpts: "" # -Xmx4g -Xms4g 로 수정
 ...
 ```
 
+
+
+```
+...
+global:
+  kibanaEnabled: true
+...
+service:
+  type: ClusterIP # NodePort 로 수정
+  nodePorts:
+    restAPI: 30002
+    transport: 31002
+...
+master:
+  replicaCount: 2 # 1로 수정
+...
+data:
+  replicaCount: 2 # 1로 수정
+...
+data:
+  replicaCount: 2 # 1로 수정
+...
+coordinating:
+  replicaCount: 2 # 1로 수정
+...
+ingest:
+  replicaCount: 2 # 1로 수정
+...
+metrics:
+  enabled: true
+...
+```
+
+
+
+
+
 ## Elasticsearch 설치
 
 ```sh
@@ -43,22 +86,45 @@ $ helm install elasticsearch -f values.yaml . -n elasticsearch
 
 ```
 NAME: elasticsearch
-LAST DEPLOYED: Tue May 23 16:05:46 2023
+LAST DEPLOYED: Wed May 31 15:42:04 2023
 NAMESPACE: elasticsearch
 STATUS: deployed
 REVISION: 1
+TEST SUITE: None
 NOTES:
-1. Watch all cluster members come up.
-  $ kubectl get pods --namespace=elasticsearch -l app=elasticsearch-master -w
-2. Retrieve elastic user's password.
-  $ kubectl get secrets --namespace=elasticsearch elasticsearch-master-credentials -ojsonpath='{.data.password}' | base64 -d
-3. Test cluster health using Helm test.
-  $ helm --namespace=elasticsearch test elasticsearch
+CHART NAME: elasticsearch
+CHART VERSION: 19.8.1
+APP VERSION: 8.7.1
+
+-------------------------------------------------------------------------------
+ WARNING
+
+    Elasticsearch requires some changes in the kernel of the host machine to
+    work as expected. If those values are not set in the underlying operating
+    system, the ES containers fail to boot with ERROR messages.
+
+    More information about these requirements can be found in the links below:
+
+      https://www.elastic.co/guide/en/elasticsearch/reference/current/file-descriptors.html
+      https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html
+
+    This chart uses a privileged initContainer to change those settings in the Kernel
+    by running: sysctl -w vm.max_map_count=262144 && sysctl -w fs.file-max=65536
+
+** Please be patient while the chart is being deployed **
+
+  Elasticsearch can be accessed within the cluster on port 9200 at elasticsearch.elasticsearch.svc.cluster.local
+
+  To access from outside the cluster execute the following commands:
+
+    export NODE_PORT=$(kubectl get --namespace elasticsearch -o jsonpath="{.spec.ports[0].nodePort}" services elasticsearch)
+    export NODE_IP=$(kubectl get nodes --namespace elasticsearch -o jsonpath="{.items[0].status.addresses[0].address}")
+    curl http://$NODE_IP:$NODE_PORT/
+
 ```
 
-https://203504.iptime.org:30002/_cat 접속 후,아래 계정으로 Elasticsearch 서버를 확인해 볼 수 있다.
-- username: elastic (built-in user)
-- passwaord: (```$ kubectl get secrets --namespace=elasticsearch elasticsearch-master-credentials -ojsonpath='{.data.password}' | base64 -d```) 로 확인 가능
+http://[도메인]:30002/_cat 접속 후,아래 계정으로 Elasticsearch 서버를 확인해 볼 수 있다.
+
 
 ### Elasticsearch 삭제
 

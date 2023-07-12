@@ -8,7 +8,7 @@ Linux 환경에서는 KVM, Windows에서는 Hyper-v, MacOS에선 HyperKit을 사
 ## Mac OS에서 Multipass 설치
 
 ```sh
-brew install --cask multipass
+$ brew install --cask multipass
 ```
 
 ## Multipass 사용법
@@ -16,25 +16,54 @@ brew install --cask multipass
 ### 우분투 인스턴스 생성
 
 ```sh
-multipass launch
+$ multipass launch
 ```
 
 사용 할 버전을 명시해줄 수도 있다.
 
-```
-multipass launch 20.04
+``` sh
+$multipass launch 20.04
 ```
 
 아래와 같은 옵션 값을 통해 인스턴스의 스펙을 조절해줄 수 있다.
 
+```sh
+$ multipass launch --cpus <cpus> --disk <disk> --mem <mem> --name <name>
 ```
-multipass launch --cpus <cpus> --disk <disk> --mem <mem> --name <name>
+```sh
+$ multipass launch 20.04 --network en0 -n macmini-vm -c 6 -d 500G -m 24G
 ```
 
 - -c, --cpus <cpus>: 할당할 CPU의 개수 (최소값 : 1, 기본값 : 1)
 - -d, --disk <disk>: 할당할 저장공간 (기본적으로 byte 단위이며, K, M, G 접미사를 붙여서 단위를 지정할 수 있다.)
 - -m, --mem <mem>: 할당할 메모리 (기본적으로 byte 단위이며, K, M, G 접미사를 붙여서 단위를 지정할 수 있다.)
 - -n, --name <name>: 인스턴스의 이름을 지정해준다.
+
+## multipass 인스턴스 내에서, ubuntu 비밀번호 설정
+```sh
+$ sudo passwd ubuntu
+```
+
+## ssh 접속
+```sh
+$ ssh ubuntu@192.168.64.5
+```
+
+하지만 다음과 같이 접속이 불가능하다.
+
+```
+The authenticity of host '192.168.64.5 (192.168.64.5)' can't be established.
+ED25519 key fingerprint is SHA256:bJk2LgQsmJO6TNKWNjRl400EfLdr+hpkWdNPWZuyksU.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.64.5' (ED25519) to the list of known hosts.
+ubuntu@192.168.64.5: Permission denied (publickey).
+```
+
+
+
+
+
 
 ### 인스턴스 목록 조회
 

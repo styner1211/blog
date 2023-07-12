@@ -38,7 +38,7 @@ exec format error
 
 ```sh
 $ sudo docker run --detach \
-  --hostname 203504.iptime.org \
+  --hostname [호스트 이ㅁ] \
   --env GITLAB_OMNIBUS_CONFIG="external_url 'http://[호스트이름]:11080'; gitlab_rails['gitlab_shell_ssh_port'] = 11022" \
   --publish 11080:11080 --publish 11022:22 \
   --name gitlab \

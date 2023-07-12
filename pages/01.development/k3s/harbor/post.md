@@ -23,17 +23,42 @@ $ cd harbor
 $ sudo vi values.yaml
 ```
 
+### 옵션 1: Ingress 설정
 ```
 ...
 exposureType: proxy # ingress로 수정
 ...
 ```
 
+### 옵션 2: NodePort 설정
+```
+...
+externalURL: https://core.harbor.domain # https://[도메인]:32765로 수정
+...
+service:
+  type: ClusterIP # NodePort 로 수정
+  nodePorts:
+    https: "" # 32765로 수정
+...
+nginx:
+  tls:
+  commonName: [도메인]
+```
+
 ## Harbor 설치
 
 ```sh
-helm install harbor -f values.yaml . -n harbor
+$ kubectl create namespace harbor
+$ helm install harbor -f values.yaml . -n harbor
 ```
+
+
+## Harbor 업그레이드
+> `jekins-values.yaml` 파일 수정 후, 변경된 설정으로 젠킨스 재실행
+```sh
+$ helm upgrade harbor bitnami/harbor --namespace harbor -f values.yaml
+```
+
 
 ## Harbor 초기 로그인 계정
 
@@ -43,8 +68,15 @@ echo Password: $(kubectl get secret --namespace harbor harbor-core-envvars -o js
 ```
 
 ## Harbor 접속
+
+### 옵션 1: Ingress 경우
 ```
 https://core.harbor.domain
+```
+
+### 옵션 2: NodePort 경우
+```
+https://[도메인]:32765
 ```
 
 
@@ -55,5 +87,5 @@ https://core.harbor.domain
 > 아래 명령어 외, Harbor 관련 PVC를 모두 삭제해야 재설치시 로그인 이슈가 없음
 
 ```sh
-helm delete -n harbor harbor
+$ helm delete -n harbor harbor
 ```
